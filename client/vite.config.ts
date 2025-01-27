@@ -15,15 +15,5 @@ export default defineConfig({
   },
   server: {
     open: '/',
-    cors: {
-      origin: 'http://example.com',
-    },
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:5000',
-    //     changeOrigin: true,
-    //     rewrite: (path) => path.replace(/^\/api/, ''),
-    //   },
-    // },
   },
 })

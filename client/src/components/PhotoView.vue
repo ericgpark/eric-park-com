@@ -12,14 +12,14 @@
 defineProps<{
   src: string,
   alt: string,
-}>()
+}>();
 </script>
 
 <style scoped>
 
 .photo-view__image {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;
 }
 
 </style>

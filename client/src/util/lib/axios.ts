@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const setAxiosDefaults = async () => {
-  const base = import.meta.env.VITE_API_URL
-  axios.defaults.baseURL = base
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL
 }
 
 export default setAxiosDefaults

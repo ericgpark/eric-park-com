@@ -1,6 +1,9 @@
 <template>
   <main>
-    <div class="content">
+    <div
+      class="content"
+      :class="{ background: loading }"
+    >
       <spinner v-if="loading" />
       <photo-carousel
         v-else
@@ -35,11 +38,22 @@
 <style scoped>
   main {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 
   .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     aspect-ratio: 3 / 2;
-    height: 92%;
+    height: 80vh;
+    border-radius: 0.5%;
+  }
+
+  .background {
+    background: #999;
   }
 
 </style>

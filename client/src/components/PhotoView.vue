@@ -1,11 +1,9 @@
 <template>
-  <div class="photoView">
-    <img
-      class="photo-view__image"
-      :src="src"
-      :alt="alt"
-    />
-  </div>
+  <img
+    class="photo-view__image"
+    :src="src"
+    :alt="alt"
+  />
 </template>
 
 <script setup lang="ts">
@@ -17,9 +15,12 @@ defineProps<{
 
 <style scoped>
 
+.photo-view {
+  position: absolute;
+}
+
 .photo-view__image {
-  height: 100%;
-  width: auto;
+  height: 80vh;
 }
 
 </style>

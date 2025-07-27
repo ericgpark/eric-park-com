@@ -1,9 +1,9 @@
 import os
 from flask import Flask, request, jsonify
 from flask_caching import Cache
+from flask_cors import CORS
 from Controllers.flickrController import get_photos
 from dotenv import load_dotenv
-from flask_cors import CORS
 
 load_dotenv()
 

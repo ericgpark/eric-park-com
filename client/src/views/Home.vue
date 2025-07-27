@@ -7,7 +7,8 @@
       <spinner v-if="loading" />
       <photo-carousel
         v-else
-        :photos="photos" />
+        :photos="photos"
+      />
     </div>
   </main>
 </template>

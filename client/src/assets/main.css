@@ -4,3 +4,20 @@
   height: 92vh;
   font-family: system-ui;
 }
+
+:root {
+  --spacing-100: 0.25rem;
+  --spacing-200: 0.5rem;
+  --spacing-300: 1rem;
+  --spacing-400: 2rem;
+  --spacing-500: 4rem;
+  --spacing-600: 8rem;
+  --spacing-700: 16rem;
+  --spacing-800: 32rem;
+  --spacing-900: 64rem;
+
+  --font-size-heading: 2rem;
+  --font-size-subheading: 1.5rem;
+  --font-size-paragraph: 1rem;
+  --font-size-caption: 0.875rem;
+}

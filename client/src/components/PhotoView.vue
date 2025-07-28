@@ -17,6 +17,7 @@ defineProps<{
 
 .photo-view {
   position: absolute;
+  border-radius: var(--spacing-100);
 }
 
 .photo-view__image {

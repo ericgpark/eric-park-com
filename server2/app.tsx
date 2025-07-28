@@ -8,6 +8,7 @@ import {
 } from './Controllers/flickrController';
 
 require('dotenv').config();
+
 const origin = process.env.ORIGIN;
 
 app.use(cors({ origin }));

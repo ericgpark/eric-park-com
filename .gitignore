@@ -29,5 +29,4 @@ coverage
 
 *.tsbuildinfo
 
-server/.env
-client/.env
+*.env

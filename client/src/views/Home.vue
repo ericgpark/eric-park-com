@@ -48,8 +48,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    aspect-ratio: 3 / 2;
-    height: 80vh;
     border-radius: 0.5%;
   }
 

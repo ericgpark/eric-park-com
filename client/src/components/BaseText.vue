@@ -12,7 +12,7 @@
 
 defineProps<{
   tag: 'h1' | 'h2' | 'h3' | 'p' | 'span',
-  type: 'heading' | 'subheading' | 'paragraph' | 'caption',
+  type: 'heading' | 'subheading' | 'body' | 'caption',
 }>();
 
 </script>

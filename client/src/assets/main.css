@@ -1,7 +1,6 @@
 #app {
   display: flex;
-  padding: 2rem;
-  height: 92vh;
+  height: 95vh;
   font-family: system-ui;
 }
 

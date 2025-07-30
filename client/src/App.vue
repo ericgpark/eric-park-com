@@ -1,19 +1,34 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <nav>
+      <RouterLink to="/">
+        <base-text
+          class="link"
+          tag="p"
+          type="caption"
+        >
+          Home
+        </base-text>
+      </RouterLink>
+      <RouterLink to="/about">
+        <base-text
+          class="link"
+          tag="p"
+          type="caption"
+        >
+          About
+        </base-text>
+      </RouterLink>
+    </nav>
   </header>
 
   <RouterView />
 </template>
+
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import BaseText from '@/components/BaseText.vue';
+</script>
 
 <style scoped>
 header {
@@ -26,9 +41,12 @@ header {
   margin: 0 auto 2rem;
 }
 
+.link {
+  margin: 0;
+}
+
 nav {
   width: 100%;
-  font-size: 12px;
   text-align: center;
   margin-top: 2rem;
 }
@@ -54,29 +72,18 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   header {
     position: absolute;
-    height: 92%;
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    left: 20vw;
   }
 
   .logo {
     margin: 0 2rem 0 0;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
 </style>

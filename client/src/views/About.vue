@@ -8,7 +8,7 @@
     </base-text>
     <base-text
       tag="p"
-      type="paragraph"
+      type="body"
     >
       Hi. My name is Eric Park, and I like creating images. I made this website to showcase my work and to share my thoughts on photography and art.
       Try interacting with the website using the arrow keys. I hope you enjoy browsing through my photos.

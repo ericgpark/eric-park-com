@@ -12,20 +12,23 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
-  import type { Ref } from 'vue'
+  import { ref, computed, onMounted } from 'vue'
+  import type { Ref, ComputedRef } from 'vue'
+  import { useStore } from 'vuex'
   import PhotoCarousel from '@/components/PhotoCarousel.vue'
   import Spinner from '@/components/Spinner.vue'
-  import Photos from '@/util/api/photos'
   import type { Photo } from '@/types'
 
+  const store = useStore();
+
   const loading: Ref<boolean> = ref(false);
-  const photos: Ref<Photo[]> = ref([]);
+
+  const photos: ComputedRef<Photo[]> = computed(() => store.state.photos.recents);
 
   onMounted(async () => {
     loading.value = true;
     try {
-      photos.value = await Photos.getPhotos();
+      await store.dispatch('photos/fetchRecents');
     } catch (error) {
       console.error(error);
     } finally {

@@ -32,7 +32,6 @@ import BaseText from '@/components/BaseText.vue';
     width: calc(830px - var(--spacing-400) * 2);
     height: 554px;
     padding: 0 var(--spacing-400);
-
   }
 
   .about-view__title {

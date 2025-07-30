@@ -17,7 +17,11 @@ const flickr = {
     },
   },
   actions: {
-    fetchRecents: async ({ commit }: { commit: (mutation: string, payload: Photo[]) => void }) => {
+    fetchRecents: async ({ state, commit }: { state: { recents: Photo[] }, commit: (mutation: string, payload: Photo[]) => void }) => {
+      if (state.recents.length > 0) {
+        return state.recents;
+      }
+      // Fetch recent photos from Flickr API
       try {
         const photos: Photo[] = await Flickr.getPhotos();
         commit('setRecents', photos);

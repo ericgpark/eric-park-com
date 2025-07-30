@@ -22,6 +22,7 @@ defineProps<{
 .base-text {
   font-family: var(--font-family);
   color: var(--text-color);
+  margin: 0;
 
   &.heading {
     font-size: var(--font-size-heading);

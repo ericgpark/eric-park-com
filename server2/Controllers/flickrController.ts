@@ -1,4 +1,6 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
 const host = process.env.FLICKR_HOST;
 const apiKey = process.env.FLICKR_API_KEY;
 const apiSecret = process.env.FLICKR_API_SECRET;

@@ -1,12 +1,17 @@
 <template>
-  <main>
+  <div
+    class="about-view"
+    main
+  >
     <base-text
+      class="about-view__title"
       tag="h1"
       type="heading"
     >
       About
     </base-text>
     <base-text
+      class="about-view__body"
       tag="p"
       type="body"
     >
@@ -15,7 +20,7 @@
 
       For business inquiries, please reach me at <a href="mailto:ericparkmusic@gmail.com">ericparkmusic@gmail.com</a>
     </base-text>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +28,18 @@ import BaseText from '@/components/BaseText.vue';
 </script>
 
 <style scoped>
-  main {
-    padding: 2rem;
+  .about-view {
+    width: calc(830px - var(--spacing-400) * 2);
+    height: 554px;
+    padding: 0 var(--spacing-400);
+
+  }
+
+  .about-view__title {
+    margin-bottom: var(--spacing-300);
+  }
+
+  .about-view__body {
+    line-height: 1.5rem;
   }
 </style>

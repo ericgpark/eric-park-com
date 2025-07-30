@@ -1,16 +1,14 @@
 <template>
-  <main>
-    <div
-      class="content"
-      :class="{ background: loading }"
-    >
-      <spinner v-if="loading" />
-      <photo-carousel
-        v-else
-        :photos="photos"
-      />
-    </div>
-  </main>
+  <div
+    class="content"
+    :class="{ background: loading }"
+  >
+    <spinner v-if="loading" />
+    <photo-carousel
+      v-else
+      :photos="photos"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -37,17 +35,12 @@
 </script>
 
 <style scoped>
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
   .content {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 830px;
+    min-height: 554px;
     border-radius: 0.5%;
   }
 

@@ -1,7 +1,10 @@
 #app {
   display: flex;
-  height: 95vh;
+  justify-content: center;
+  align-items: center;
   font-family: system-ui;
+  height: calc(100vh - 16px);
+  overflow: hidden;
 }
 
 :root {

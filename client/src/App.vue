@@ -1,28 +1,30 @@
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">
-        <base-text
-          class="link"
-          tag="p"
-          type="caption"
-        >
-          Home
-        </base-text>
-      </RouterLink>
-      <RouterLink to="/about">
-        <base-text
-          class="link"
-          tag="p"
-          type="caption"
-        >
-          About
-        </base-text>
-      </RouterLink>
-    </nav>
-  </header>
+  <div class="layout">
+    <header>
+      <nav>
+        <RouterLink to="/">
+          <base-text
+            class="link"
+            tag="p"
+            type="caption"
+          >
+            Home
+          </base-text>
+        </RouterLink>
+        <RouterLink to="/about">
+          <base-text
+            class="link"
+            tag="p"
+            type="caption"
+          >
+            About
+          </base-text>
+        </RouterLink>
+      </nav>
+    </header>
 
-  <RouterView />
+    <RouterView />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -31,6 +33,12 @@ import BaseText from '@/components/BaseText.vue';
 </script>
 
 <style scoped>
+
+.layout {
+  display: flex;
+  flex-direction: row;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -48,7 +56,6 @@ header {
 nav {
   width: 100%;
   text-align: center;
-  margin-top: 2rem;
 }
 
 nav a.router-link-exact-active {
@@ -61,7 +68,7 @@ nav a.router-link-exact-active:hover {
 
 nav a {
   display: inline-block;
-  padding: 0 1rem;
+  padding-right: var(--spacing-300);
   border-left: 1px solid var(--color-border);
 }
 
@@ -71,8 +78,6 @@ nav a:first-of-type {
 
 @media (min-width: 1024px) {
   header {
-    position: absolute;
-    left: 20vw;
   }
 
   .logo {

@@ -1,8 +1,6 @@
 <template>
   <photo-view
-    v-for="(photo, idx) in photos"
     class="photo-view"
-    :class="{ show: cur === idx }"
     :key="photo.id"
     :src="photo.url"
     :alt="photo.title"
@@ -10,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import PhotoView from '../components/PhotoView.vue'
 import type { Photo } from '@/types'
 
@@ -19,6 +17,10 @@ const props = defineProps<{
 }>();
 
 const cur = ref(0);
+
+const photo = computed(() => {
+  return props.photos[cur.value] ?? {};
+});
 
 onMounted(() => {
   window.addEventListener('keydown', (e) => {
@@ -34,14 +36,8 @@ onMounted(() => {
 
 <style scoped>
 .photo-view {
-  visibility: hidden;
-  opacity: 0;
+  max-height: 550px;
   transition: opacity 50ms ease-in, visibility 0ms ease-in 50ms;
 }
 
-.photo-view.show {
-  visibility: visible;
-  opacity: 1;
-  transition-delay: 0ms;
-}
 </style>

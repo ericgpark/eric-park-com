@@ -8,20 +8,15 @@
 
 <script setup lang="ts">
 defineProps<{
-  src: string,
-  alt: string,
+  src?: string,
+  alt?: string,
 }>();
 </script>
 
 <style scoped>
 
 .photo-view {
-  position: absolute;
   border-radius: var(--spacing-100);
-}
-
-.photo-view__image {
-  height: 80vh;
 }
 
 </style>

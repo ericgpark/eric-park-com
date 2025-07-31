@@ -26,6 +26,7 @@ export const getPhotos = async (req: Request, res: Response) => {
       url: await getPhotoSizes(photo.id),
     }))
   );
+
   return res.json(photos);
 };
 

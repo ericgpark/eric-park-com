@@ -5,8 +5,8 @@
   >
     <base-text
       class="about-view__title"
-      tag="h1"
-      type="heading"
+      tag="h2"
+      type="subheading"
     >
       About
     </base-text>
@@ -29,8 +29,8 @@ import BaseText from '@/components/BaseText.vue';
 
 <style scoped>
   .about-view {
-    width: calc(830px - var(--spacing-400) * 2);
-    height: 554px;
+    width: calc(825px - var(--spacing-400) * 2);
+    height: 550px;
     padding: 0 var(--spacing-400);
   }
 

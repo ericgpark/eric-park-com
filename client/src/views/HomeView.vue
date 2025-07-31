@@ -1,12 +1,5 @@
 <template>
   <div class="home-view">
-    <base-text
-      class="set-title"
-      tag="h2"
-      type="subheading"
-    >
-      Recents
-    </base-text>
     <div
       class="content"
       :class="{ background: loading }"
@@ -21,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted } from 'vue'
+  import { ref, computed, watch, onMounted } from 'vue'
   import type { Ref, ComputedRef } from 'vue'
   import { useStore } from 'vuex'
   import BaseText from '@/components/BaseText.vue'
@@ -44,7 +37,7 @@
     } finally {
       loading.value = false;
     }
-  })
+  });
 </script>
 
 <style scoped>
@@ -68,6 +61,14 @@
 
   .background {
     background: #999;
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      max-width: 100%;
+      min-width: auto;
+      min-height: 576px;
+    }
   }
 
 </style>

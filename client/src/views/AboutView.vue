@@ -4,13 +4,6 @@
     main
   >
     <base-text
-      class="about-view__title"
-      tag="h2"
-      type="subheading"
-    >
-      About
-    </base-text>
-    <base-text
       class="about-view__body"
       tag="p"
       type="body"
@@ -29,9 +22,8 @@ import BaseText from '@/components/BaseText.vue';
 
 <style scoped>
   .about-view {
-    width: calc(825px - var(--spacing-400) * 2);
+    width: 825px;
     height: 550px;
-    padding: 0 var(--spacing-400);
   }
 
   .about-view__title {
@@ -41,4 +33,12 @@ import BaseText from '@/components/BaseText.vue';
   .about-view__body {
     line-height: 1.5rem;
   }
+
+  @media (max-width: 768px) {
+    .about-view {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
 </style>

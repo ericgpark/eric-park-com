@@ -1,7 +1,16 @@
 <template>
   <div class="layout">
-    <header>
-      <nav>
+    <header class="header">
+      <base-text
+        class="title"
+        tag="h2"
+        type="subheading"
+      >
+        {{ title }}
+      </base-text>
+    </header>
+    <div class="content">
+      <nav class="nav">
         <RouterLink to="/">
           <base-text
             class="link"
@@ -21,27 +30,44 @@
           </base-text>
         </RouterLink>
       </nav>
-    </header>
+  
+      <RouterView />
 
-    <RouterView />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { ref, watch } from 'vue';
+import { useRoute, RouterLink, RouterView } from 'vue-router'
 import BaseText from '@/components/BaseText.vue';
+
+const route = useRoute();
+
+const title = ref('Recents');
+
+watch(route, () => {
+  if (route.name === 'home') {
+    title.value = 'Recents';
+  } else if (route.name === 'about') {
+    title.value = 'About';
+  }
+});
+
+
+
 </script>
 
 <style scoped>
 
 .layout {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
-header {
+.header {
   line-height: 1.5;
-  max-height: 100vh;
+  margin-left: 4.5rem
 }
 
 .logo {
@@ -53,11 +79,13 @@ header {
   margin: 0;
 }
 
-nav {
-  width: 100%;
-  margin-top: var(--spacing-400);
-  margin-right: var(--spacing-300);
-  text-align: center;
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav {
+  margin-right: var(--spacing-400);
 }
 
 nav a.router-link-exact-active {
@@ -68,19 +96,25 @@ nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
 
-@media (min-width: 1024px) {
-  header {
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  nav {
-    display: flex;
+@media (max-width: 768px) {
+  .layout {
     flex-direction: column;
-    justify-content: flex-start;
+    gap: var(--spacing-100);
+  }
+
+  .content {
+    flex-direction: column;
     align-items: flex-start;
+    gap: var(--spacing-200);
+  }
+
+  .header {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .nav {
+    margin-right: var(--spacing-600);
   }
 }
 </style>

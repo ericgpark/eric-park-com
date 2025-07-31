@@ -55,6 +55,8 @@ header {
 
 nav {
   width: 100%;
+  margin-top: var(--spacing-400);
+  margin-right: var(--spacing-300);
   text-align: center;
 }
 
@@ -64,16 +66,6 @@ nav a.router-link-exact-active {
 
 nav a.router-link-exact-active:hover {
   background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding-right: var(--spacing-300);
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
 }
 
 @media (min-width: 1024px) {

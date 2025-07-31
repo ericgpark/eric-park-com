@@ -3,3 +3,13 @@ export interface Photo {
   title: string
   url: string
 }
+
+export interface PhotoSet {
+  id: string;
+  title: {
+    _content: string;
+  };
+  description: {
+    _content: string;
+  };
+}

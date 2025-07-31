@@ -36,6 +36,7 @@ onMounted(() => {
 
 <style scoped>
 .photo-view {
+  max-width: 825px;
   max-height: 550px;
   transition: opacity 50ms ease-in, visibility 0ms ease-in 50ms;
 }

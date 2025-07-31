@@ -10,9 +10,9 @@
 
 <script setup lang="ts">
 
-defineProps<{
-  tag: 'h1' | 'h2' | 'h3' | 'p' | 'span',
-  type: 'heading' | 'subheading' | 'body' | 'caption',
+const { tag = 'p', type = 'body' } = defineProps<{
+  tag?: 'h1' | 'h2' | 'h3' | 'p' | 'span',
+  type?: 'heading' | 'subheading' | 'body' | 'caption',
 }>();
 
 </script>

@@ -6,15 +6,18 @@ const apiKey = import.meta.env.VITE_FLICKR_API_KEY;
 const userId = import.meta.env.VITE_FLICKR_USER_ID;
 
 export default {
-  async getPhotos(): Promise<Photo[]> {
-    
-
+  async getPhotos(setId: string): Promise<Photo[]> {
     if (!host || !apiKey || !userId) {
       throw new Error('Flickr API configuration is missing');
     }
 
+    let url;
+    if (!setId) {
+      url = `${host}/?method=flickr.people.getPublicPhotos&api_key=${apiKey}&user_id=${userId}&format=json&nojsoncallback=1`;
+    } else {
+      url = `${host}/?method=flickr.photosets.getPhotos&api_key=${apiKey}&photoset_id=${setId}&user_id=${userId}&format=json&nojsoncallback=1`;
+    }
     let response;
-    const url = `${host}/?method=flickr.people.getPublicPhotos&api_key=${apiKey}&user_id=${userId}&format=json&nojsoncallback=1`;
 
     try {
       response = await axios.get(url);

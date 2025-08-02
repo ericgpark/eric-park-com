@@ -6,10 +6,6 @@ export interface Photo {
 
 export interface PhotoSet {
   id: string;
-  title: {
-    _content: string;
-  };
-  description: {
-    _content: string;
-  };
+  title: string;
+  description: string;
 }

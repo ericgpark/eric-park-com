@@ -31,14 +31,19 @@
         </RouterLink>
       </nav>
   
-      <RouterView />
+      <RouterView
+        @change-set="handleChangeSet"
+      />
 
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import {
+  ref,
+  watch,
+} from 'vue';
 import { useRoute, RouterLink, RouterView } from 'vue-router'
 import BaseText from '@/components/BaseText.vue';
 
@@ -54,7 +59,9 @@ watch(route, () => {
   }
 });
 
-
+const handleChangeSet = (newTitle: string) => {
+  title.value = newTitle;
+};
 
 </script>
 

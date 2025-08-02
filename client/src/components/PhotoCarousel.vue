@@ -23,6 +23,10 @@ const props = defineProps<{
   photos: Photo[],
 }>();
 
+const emit = defineEmits<{
+  (event: 'change-set', newTitle: string): void;
+}>();
+
 const cur = ref(0);
 
 const photo = computed(() => {
@@ -35,6 +39,14 @@ onMounted(() => {
       cur.value = (cur.value + 1) % props.photos.length;
     } else if (e.key === 'ArrowLeft') {
       cur.value = (cur.value - 1 + props.photos.length) % props.photos.length;
+    } else if (e.key === 'ArrowUp') {
+      // Emit an event to change the set
+      emit('change-set', 'up');
+      cur.value = 0;
+    } else if (e.key === 'ArrowDown') {
+      // Emit an event to change the set
+      emit('change-set', 'down');
+      cur.value = 0;
     }
   });
 });

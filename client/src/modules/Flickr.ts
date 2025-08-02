@@ -4,36 +4,36 @@ import Flickr from '@/util/api/flickr';
 const flickr = {
   namespaced: true,
   state: {
-    recents: [] as Photo[],
+    currentSet: [] as Photo[],
     setList: [] as PhotoSet[],
   },
   getters: {
-    recents: (state: { recents: Photo[] }) => {
-      return state.recents;
+    currentSet: (state: { currentSet: Photo[] }) => {
+      return state.currentSet;
     },
     setList: (state: { setList: PhotoSet[] }) => {
       return state.setList;
     },
   },
   mutations: {
-    setRecents: (state: { recents: Photo[] }, photos: Photo[]) => {
-      state.recents = photos;
+    setCurrentSet: (state: { currentSet: Photo[] }, photos: Photo[]) => {
+      state.currentSet = photos;
     },
     setSetList: (state: { setList: PhotoSet[] }, sets: PhotoSet[]) => {
       state.setList = sets;
     },
   },
   actions: {
-    getPhotos: async ({ state, commit }: { state: { recents: Photo[] }, commit: (mutation: string, payload: Photo[]) => void }, setId: string) => {
-      if (state.recents.length > 0) {
-        return state.recents;
+    getPhotos: async ({ state, commit }: { state: { currentSet: Photo[] }, commit: (mutation: string, payload: Photo[]) => void }, setId?: string) => {
+      if (!setId && state.currentSet.length > 0) {
+        return state.currentSet;
       }
-      // Fetch recent photos from Flickr API
+      // Fetch photos from Flickr API
       try {
         const photos: Photo[] = await Flickr.getPhotos(setId);
-        commit('setRecents', photos);
+        commit('setCurrentSet', photos);
       } catch (error) {
-        console.error('Failed to fetch recent photos:', error);
+        console.error('Failed to fetch photos:', error);
       }
     },
     getSetList: async ({ state, commit }: { state: { setList: PhotoSet[] }, commit: (mutation: string, payload: PhotoSet[]) => void }) => {

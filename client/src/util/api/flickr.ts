@@ -6,15 +6,15 @@ const apiKey = import.meta.env.VITE_FLICKR_API_KEY;
 const userId = import.meta.env.VITE_FLICKR_USER_ID;
 
 export default {
-  async getPhotos(setId: string): Promise<Photo[]> {
+  async getPhotos(setId?: string): Promise<Photo[]> {
     if (!host || !apiKey || !userId) {
       throw new Error('Flickr API configuration is missing');
     }
 
     let url;
-    if (!setId) {
+    if (!setId) { // If setId is not provided, fetch the most recent public photos
       url = `${host}/?method=flickr.people.getPublicPhotos&api_key=${apiKey}&user_id=${userId}&format=json&nojsoncallback=1`;
-    } else {
+    } else { // If setId is provided, fetch photos from the specified set
       url = `${host}/?method=flickr.photosets.getPhotos&api_key=${apiKey}&photoset_id=${setId}&user_id=${userId}&format=json&nojsoncallback=1`;
     }
     let response;
@@ -26,10 +26,15 @@ export default {
       throw new Error('Failed to fetch photos');
     }
     
-    const data = response.data;
+    let data;
+    if (setId) {
+      data = response.data.photoset;
+    } else {
+      data = response.data.photos;
+    }
 
     const photos = await Promise.all(
-      data.photos.photo.map(async (photo: Photo) => ({
+      data.photo.map(async (photo: Photo) => ({
         id: photo.id,
         title: photo.title,
         url: await getPhotoSizes(photo.id),
@@ -53,7 +58,7 @@ export default {
     }
 
     const data = response.data;
-    return data.photosets.photoset.map((set: PhotoSet) => ({
+    return data.photosets.photoset.map((set: { id: string, title: { _content: string }, description: { _content: string } }) => ({
       id: set.id,
       title: set.title._content,
       description: set.description._content,

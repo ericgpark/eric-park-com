@@ -5,24 +5,12 @@ export default {
   async getPhotos(setId?: string): Promise<Photo[]> {
     const endpoint = `/photos${setId ? `?setId=${setId}` : ''}`;
 
-    let response;
-    try {
-      response = await axios.get(endpoint);
-    } catch (error) {
-      console.error('flickr#getPhotos - Failed to fetch photos from Flickr:', error);
-      throw new Error('Failed to fetch photos');
-    }
+    const response = await axios.get(endpoint);
 
     return response.data as Photo[];
   },
   async getSetList(): Promise<PhotoSet[]> {
-    let response;
-    try {
-      response = await axios.get(`/sets`);
-    } catch (error) {
-      console.error('flickr#getSetList - Failed to fetch photo sets from Flickr:', error);
-      throw new Error('Failed to fetch photo sets');
-    }
+    const response = await axios.get(`/sets`);
 
     return response.data as PhotoSet[];
   },

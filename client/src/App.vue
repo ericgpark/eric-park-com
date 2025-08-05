@@ -37,19 +37,22 @@
 
     </div>
   </div>
+  <base-toast />
 </template>
 
 <script setup lang="ts">
 import {
   ref,
   watch,
+  type Ref,
 } from 'vue';
 import { useRoute, RouterLink, RouterView } from 'vue-router'
+import BaseToast from '@/components/BaseToast.vue';
 import BaseText from '@/components/BaseText.vue';
 
 const route = useRoute();
 
-const title = ref('Recents');
+const title: Ref<string> = ref('Recents');
 
 watch(route, () => {
   if (route.name === 'home') {
@@ -59,7 +62,7 @@ watch(route, () => {
   }
 });
 
-const handleChangeSet = (newTitle: string) => {
+const handleChangeSet = (newTitle: string): void => {
   title.value = newTitle;
 };
 

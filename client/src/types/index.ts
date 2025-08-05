@@ -9,3 +9,11 @@ export interface PhotoSet {
   title: string;
   description: string;
 }
+
+export type ToastType = 'success' | 'alert' | 'warning' | 'error';
+
+export interface Toast {
+  message: string,
+  type: ToastType,
+  isVisible?: boolean,
+};

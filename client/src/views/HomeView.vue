@@ -41,6 +41,10 @@ onMounted(async () => {
     await store.dispatch('photos/getPhotos');
   } catch (error) {
     console.error(error);
+    store.commit('toast/setToast', {
+      message: error ?? 'Unknown error',
+      type: 'error',
+    });
   } finally {
     loading.value = false;
   }

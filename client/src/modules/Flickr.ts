@@ -1,4 +1,4 @@
-import type { Photo, PhotoSet } from '@/types/index';
+import type { Photo, PhotoSet, Toast } from '@/types/index';
 import Flickr from '@/util/api/flickr';
 
 const flickr = {
@@ -24,29 +24,21 @@ const flickr = {
     },
   },
   actions: {
-    getPhotos: async ({ state, commit }: { state: { currentSet: Photo[] }, commit: (mutation: string, payload: Photo[]) => void }, setId?: string) => {
+    getPhotos: async ({ state, commit }: { state: { currentSet: Photo[] }, commit: (mutation: string, payload: Photo[] | Toast) => void }, setId?: string) => {
       if (!setId && state.currentSet.length > 0) {
         return state.currentSet;
       }
       // Fetch photos from Flickr API
-      try {
-        const photos: Photo[] = await Flickr.getPhotos(setId);
-        commit('setCurrentSet', photos);
-      } catch (error) {
-        console.error('Failed to fetch photos:', error);
-      }
+      const photos: Photo[] = await Flickr.getPhotos(setId);
+      commit('setCurrentSet', photos);
     },
     getSetList: async ({ state, commit }: { state: { setList: PhotoSet[] }, commit: (mutation: string, payload: PhotoSet[]) => void }) => {
       if (state.setList.length > 0) {
         return state.setList;
       }
       // Fetch photo sets from Flickr API
-      try {
-        const sets: PhotoSet[] = await Flickr.getSetList();
-        commit('setSetList', sets);
-      } catch (error) {
-        console.error('Failed to fetch photo sets:', error);
-      }
+      const sets: PhotoSet[] = await Flickr.getSetList();
+      commit('setSetList', sets);
     }
   },
 };

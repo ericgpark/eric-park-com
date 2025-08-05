@@ -22,4 +22,38 @@
   --font-size-subheading: 1.5rem;
   --font-size-paragraph: 1rem;
   --font-size-caption: 0.875rem;
+
+  --color-primary-100: #3182ce;
+  --color-primary-200: #2b6cb0;
+  --color-primary-300: #2c5282;
+  --color-primary-400: #2a4365;
+  --color-primary-500: #1a365d;
+
+  --color-error-50: #ff9999;
+  --color-error-100: #e53e3e;
+  --color-error-200: #c53030;
+  --color-error-300: #9b2c2c;
+  --color-error-400: #742a2a;
+  --color-error-500: #63171b;
+
+  --color-alert-50: #ffb07b;
+  --color-alert-100: #dd6b20;
+  --color-alert-200: #c05621;
+  --color-alert-300: #9c4221;
+  --color-alert-400: #7b341e;
+  --color-alert-500: #652b19;
+
+  --color-warning-50: #ffda91;
+  --color-warning-100: #d69e2e;
+  --color-warning-200: #b7791f;
+  --color-warning-300: #975a16;
+  --color-warning-400: #744210;
+  --color-warning-500: #5f370e;
+
+  --color-success-50: #9dffcb;
+  --color-success-100: #38a169;
+  --color-success-200: #2f855a;
+  --color-success-300: #276749;
+  --color-success-400: #22543d;
+  --color-success-500: #1c4532;
 }

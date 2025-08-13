@@ -42,7 +42,7 @@ onMounted(async () => {
   } catch (error) {
     console.error(error);
     store.commit('toast/setToast', {
-      message: error ?? 'Unknown error',
+      message: error,
       type: 'error',
     });
   } finally {

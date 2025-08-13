@@ -5,12 +5,30 @@ export default {
   async getPhotos(setId?: string): Promise<Photo[]> {
     const endpoint = `/photos${setId ? `?setId=${setId}` : ''}`;
 
-    const response = await axios.get(endpoint);
+    let response;
+    try {
+      response = await axios.get(endpoint);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(error.response?.data.error ?? 'Unknown error');
+      } else {
+        throw error;
+      }
+    }
 
     return response.data as Photo[];
   },
   async getSetList(): Promise<PhotoSet[]> {
-    const response = await axios.get(`/sets`);
+    let response;
+    try {
+      response = await axios.get(`/sets`);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(error.response?.data.error ?? 'Unknown error');
+      } else {
+        throw error;
+      }
+    }
 
     return response.data as PhotoSet[];
   },

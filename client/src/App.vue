@@ -32,7 +32,7 @@
       </nav>
   
       <RouterView
-        @change-set="handleChangeSet"
+        @change-cat="handleChangeCat"
       />
 
     </div>
@@ -62,7 +62,7 @@ watch(route, () => {
   }
 });
 
-const handleChangeSet = (newTitle: string): void => {
+const handleChangeCat = (newTitle: string): void => {
   title.value = newTitle;
 };
 

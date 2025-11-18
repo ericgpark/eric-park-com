@@ -7,7 +7,7 @@
       class="photo-view"
       :key="activePhotos[cur]?.id"
       :src="(activePhotos[cur]?.src ?? '').replace('/public', '')"
-      :alt="activePhotos[cur]?.title"
+      :alt="activePhotos[cur]?.id"
     />
   </div>
 </template>

@@ -1,13 +1,12 @@
 export interface Photo {
   id: string
-  title: string
-  url: string
+  src: string
+  categories: Category['id'][]
 }
 
-export interface PhotoSet {
+export interface Category {
   id: string;
-  title: string;
-  description: string;
+  name: string;
 }
 
 export type ToastType = 'success' | 'alert' | 'warning' | 'error';

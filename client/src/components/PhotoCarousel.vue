@@ -5,7 +5,6 @@
     <PhotoView
       v-if="activePhotos.length > 0 && activePhotos[cur]"
       class="photo-view"
-      :key="activePhotos[cur]?.id"
       :src="(activePhotos[cur]?.src ?? '').replace('/public', '')"
       :alt="activePhotos[cur]?.id"
     />
@@ -34,13 +33,38 @@ const photos: Ref<Photo[]> = ref([]);
 const cur = ref(0);
 const curCat = ref(0);
 
-const activePhotos = computed(() => {
-  randomize();
-  return photos.value.filter((photo) => photo.categories.includes(categories[curCat.value].id));
-});
+const activePhotos = computed(() =>
+  photos.value.filter((photo) => photo.categories.includes(categories[curCat.value].id))
+);
 
 const randomize = () => {
-  photos.value = photos.value.sort(() => Math.random() - 0.5);
+  // Use a non-mutating shuffle (create a new array reference) so Vue's reactivity
+  // sees the change and we avoid in-place mutations during rendering.
+  photos.value = [...photos.value].sort(() => Math.random() - 0.5);
+};
+
+// Simple cache of already-preloaded srcs to avoid re-downloading the same image
+const preloaded = new Set<string>();
+
+const mod = (n: number, m: number) => ((n % m) + m) % m;
+
+const preloadImage = (src?: string) => {
+  if (!src) return;
+  if (preloaded.has(src)) return;
+  const img = new Image();
+  img.src = src;
+  // mark immediately — browsers will coalesce duplicate downloads
+  preloaded.add(src);
+};
+
+const preloadAround = (center: number, radius = 2) => {
+  const list = activePhotos.value;
+  const n = list.length;
+  if (!n) return;
+  for (let offset = -radius; offset <= radius; offset++) {
+    const idx = mod(center + offset, n);
+    preloadImage(list[idx]?.src);
+  }
 };
 
 onMounted(async () => {
@@ -53,11 +77,8 @@ onMounted(async () => {
     photos.value = await res.json();
     randomize();
 
-    // Preload images
-    photos.value.forEach(photo => {
-      const img = new Image();
-      img.src = photo.src; // this starts the browser download
-    });
+    // Preload nearby images (centered at index 0 initially) instead of mass-loading
+    preloadAround(cur.value, 4);
   } catch (err) {
     // Log any error so it's visible in the console (was likely failing silently before)
     console.error('Error loading photos.json:', err);
@@ -69,18 +90,21 @@ onMounted(async () => {
     if (e.key === 'ArrowRight') {
       cur.value = (cur.value + 1) % activePhotos.value.length;
     } else if (e.key === 'ArrowLeft') {
-      cur.value = (cur.value - 1) % activePhotos.value.length;
+      cur.value = (cur.value - 1 + activePhotos.value.length) % activePhotos.value.length;
       } else if (e.key === 'ArrowUp') {
-      // Emit an event to change the set
+        // Emit an event to change the set and reshuffle for the new category
+        curCat.value = (curCat.value - 1 + categories.length) % categories.length;
+        emit('changeCat', categories[curCat.value].name);
+        randomize();
+        cur.value = 0;
+      } else if (e.key === 'ArrowDown') {
+      // Emit an event to change the set and reshuffle for the new category
       curCat.value = (curCat.value + 1) % categories.length;
-        emit('changeCat', categories[curCat.value].name);
-      cur.value = 0;
-    } else if (e.key === 'ArrowDown') {
-      // Emit an event to change the set
-      curCat.value = (curCat.value - 1 + categories.length) % categories.length;
-        emit('changeCat', categories[curCat.value].name);
+      emit('changeCat', categories[curCat.value].name);
+      randomize();
       cur.value = 0;
     }
+    console.log(activePhotos.value[cur.value].id)
   });
 });
 
@@ -93,6 +117,8 @@ watch(activePhotos, (list) => {
   if (cur.value >= list.length) {
     cur.value = 0;
   }
+  // When the active set changes, preload around the current index
+  preloadAround(cur.value, 2);
 });
 
 watch(isSwiping, (swiping) => {
@@ -105,13 +131,20 @@ watch(isSwiping, (swiping) => {
   }
 });
 
+// Preload neighbors whenever the current index changes to reduce flicker
+watch(cur, (c) => {
+  preloadAround(c, 2);
+});
+
 </script>
 
 <style scoped>
   .photo-view {
     max-width: 825px;
     max-height: 550px;
-    transition: opacity 50ms ease-in, visibility 0ms ease-in 50ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (max-width: 768px) {

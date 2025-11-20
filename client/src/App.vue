@@ -52,11 +52,11 @@ import BaseText from '@/components/BaseText.vue';
 
 const route = useRoute();
 
-const title: Ref<string> = ref('Recents');
+const title: Ref<string> = ref('All');
 
 watch(route, () => {
   if (route.name === 'home') {
-    title.value = 'Recents';
+    title.value = 'All';
   } else if (route.name === 'about') {
     title.value = 'About';
   }
